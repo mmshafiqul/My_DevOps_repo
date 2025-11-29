@@ -1,9 +1,9 @@
 #All GitHub commands line for DevOps
 
 
-🔥 GitHub CLI Cheat Sheet for DevOps
+GitHub CLI Cheat Sheet for DevOps
 
-1️⃣ Authentication & Config
+SECTION 1 — Authentication & Config
 # Login to GitHub CLI
 gh auth login
 
@@ -16,7 +16,7 @@ gh auth logout
 # List available accounts (useful if multiple tokens)
 gh auth list
 
-2️⃣ Repository Management
+SECTION 2 — Repository Management
 # Clone a repo
 gh repo clone username/repo
 
@@ -35,7 +35,7 @@ gh repo list username --limit 50
 # View repo details in browser
 gh repo view username/repo --web
 
-3️⃣ Branch & PR Management
+SECTION 3 — Branch & PR Management
 # List pull requests
 gh pr list --state open --assignee @me
 
@@ -57,7 +57,7 @@ gh pr merge 123 --rebase      # Rebase merge
 # Close a PR without merging
 gh pr close 123 --comment "Closing this PR because it's obsolete"
 
-4️⃣ Issue Management
+SECTION 4 — Issue Management
 # List issues assigned to you
 gh issue list --assignee @me --state open
 
@@ -70,7 +70,7 @@ gh issue view 42
 # Close an issue
 gh issue close 42 --comment "Fixed in commit abc123"
 
-5️⃣ Workflow / Actions (CI/CD)
+SECTION 5 — Workflow / Actions (CI/CD)
 # List workflows in a repo
 gh workflow list
 
@@ -92,7 +92,7 @@ gh run cancel 123
 
 Pro Tip: Combine gh run list with --json and jq to filter and automate monitoring.
 
-6️⃣ Secrets Management
+SECTION 6 — Secrets Management
 # List repository secrets
 gh secret list
 
@@ -105,7 +105,7 @@ gh secret remove MY_SECRET
 
 Useful for CI/CD pipelines (Docker passwords, API tokens, SSH keys).
 
-7️⃣ Gists (Useful for sharing scripts / configs)
+SECTION 7 — Gists (Useful for sharing scripts / configs)
 # Create a public gist from file
 gh gist create script.sh --public
 
@@ -118,7 +118,7 @@ gh gist list
 # View gist in browser
 gh gist view <gist-id> --web
 
-8️⃣ Aliases (DevOps speed hacks)
+SECTION 8 — Aliases (DevOps speed hacks)
 # Set alias for checkout PR
 gh alias set co 'pr checkout'
 
@@ -131,7 +131,7 @@ gh alias set pm 'pr merge --squash'
 # List workflow runs with JSON output
 gh alias set runs 'run list --limit 5 --json databaseId,status,conclusion'
 
-9️⃣ Other Pro Commands
+SECTION 9 — Other Pro Commands
 # View latest release
 gh release view --latest
 
@@ -146,7 +146,7 @@ gh discussion list
 gh discussion view 123 --web
 
 
-10️⃣ Pro DevOps Tips
+SECTION 10 — Pro DevOps Tips
 
 Automate deployment triggers:
 

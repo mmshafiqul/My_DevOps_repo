@@ -1,5 +1,7 @@
 #All Git commands line fro DevOps
 
+## Git CLI Cheat Sheet for DevOps
+
 SECTION 1 — WSL (Windows Subsystem for Linux) Setup
 Enable WSL (PowerShell as Admin)
 wsl --install
