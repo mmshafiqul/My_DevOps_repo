@@ -144,3 +144,15 @@ gh pr diff main..develop
 # Open GitHub Discussions
 gh discussion list
 gh discussion view 123 --web
+
+
+10️⃣ Pro DevOps Tips
+
+Automate deployment triggers:
+
+gh workflow run deploy.yml --ref main
+
+
+Monitor CI/CD in CLI:
+
+gh run list --limit 5 --status in_progress

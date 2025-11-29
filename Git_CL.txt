@@ -1,0 +1,211 @@
+#All Git commands line fro DevOps
+
+SECTION 1 — WSL (Windows Subsystem for Linux) Setup
+Enable WSL (PowerShell as Admin)
+wsl --install
+wsl --set-default-version 2
+
+List available distros
+wsl --list --online
+
+Install Ubuntu 24.04
+wsl --install -d Ubuntu-24.04
+
+Enter WSL
+wsl
+
+Update WSL Ubuntu
+sudo apt update && sudo apt upgrade -y
+
+SECTION 2 — WSL Backup & Restore
+Backup WSL
+wsl --export Ubuntu-24.04 "C:\WSL-Backup\Ubuntu-Backup.tar"
+
+Restore WSL
+wsl --import Ubuntu-24.04 "." "C:\WSL-Backup\Ubuntu-Backup.tar"
+
+Delete Corrupted WSL
+wsl --unregister Ubuntu-24.04
+
+SECTION 3 — Install Git on Ubuntu
+Install Git
+sudo apt install git -y
+
+Verify
+git --version
+
+SECTION 4 — Configure Git (VERY IMPORTANT)
+git config --global user.name "Your Name"
+git config --global user.email "your@email.com"
+git config --list
+
+SECTION 5 — GitHub CLI Setup
+sudo apt install curl -y
+
+curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg \
+ | sudo dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg
+
+sudo chmod go+r /usr/share/keyrings/githubcli-archive-keyring.gpg
+
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] \
+https://cli.github.com/packages stable main" \
+| sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null
+
+sudo apt update
+sudo apt install gh -y
+gh --version
+
+Login
+gh auth login
+
+SECTION 6 — Setup SSH for GitHub (Private Repo Access)
+ssh-keygen -t ed25519 -C "your-email"
+cat ~/.ssh/id_ed25519.pub
+
+
+Add the key here:
+🔗 https://github.com/settings/keys
+
+Test connection:
+
+ssh -T git@github.com
+
+
+Success message:
+
+Hi username! You've successfully authenticated...
+
+SECTION 7 — Clone Repositories
+Clone private repo (via SSH)
+git clone git@github.com:user/repo.git
+
+Clone specific branch
+git clone --branch feature/test-change-02 --single-branch git@github.com:user/repo.git
+
+Clone main/default branch
+git clone git@github.com:user/repo.git
+
+SECTION 8 — Git Basics (Status → Add → Commit → Push)
+Check status
+git status
+
+Stage file
+git add README.md
+
+Stage everything
+git add .
+
+Commit
+git commit -m "Add my first file"
+
+Push
+git push origin main
+
+SECTION 9 — Branching (Pro DevOps Workflow)
+Create new branch
+git checkout -b feature/my-branch
+
+List branches
+git branch -a
+
+Edit → add → commit
+git add .
+git commit -m "My updates in branch"
+
+Push branch
+git push -u origin feature/my-branch
+
+Pull updates inside your branch
+git pull
+
+SECTION 10 — Sync Branch with Main
+Merge main into your branch
+git checkout feature/my-branch
+git fetch origin
+git merge origin/main
+
+Rebase (cleaner history)
+git checkout feature/my-branch
+git fetch origin
+git rebase origin/main
+
+SECTION 11 — Reset Branch to Fresh Main (Force Refresh)
+git reset --hard
+git checkout feature/my-branch
+git fetch origin
+git reset --hard origin/main
+git push origin feature/my-branch --force
+
+SECTION 12 — Delete Branches
+Local
+git branch -d feature/my-branch
+
+Force delete
+git branch -D feature/my-branch
+
+Remote delete
+git push origin --delete feature/my-branch
+
+SECTION 13 — Merge Branch to Main
+git checkout main
+git pull origin main
+git merge feature/my-branch
+git push origin main
+
+SECTION 14 — Git Logs & History
+git log --oneline --graph --decorate --all
+
+SECTION 15 — Create Branch from Another Branch
+From feature/my-branch
+git checkout feature/my-branch
+git checkout -b feature/my-branch-from-branch
+
+From main
+git checkout main
+git checkout -b feature/my-branch-from-main
+
+
+Push:
+
+git push -u origin branch-name
+
+SECTION 16 — Merge Branch → Branch
+Merge A into B
+git checkout B
+git fetch origin
+git merge origin/A
+git push
+
+SECTION 17 — Conflict Resolution
+
+If conflict:
+
+vi README.md
+git add .
+git commit -m "Resolve conflict"
+git push
+
+SECTION 18 — Create Local Git Repository
+mkdir my-local-repo
+cd my-local-repo
+git init
+echo "Hello" > file.txt
+git add .
+git commit -m "Initial commit"
+
+SECTION 19 — Create GitHub Repo Using CLI
+gh repo create my-repo --private --source=. --remote=origin --push
+
+SECTION 20 — Rebase, Reset, Revert (Pro Level)
+Safe revert
+git revert -m 1 COMMIT_HASH
+git push origin main
+
+Hard reset (Dangerous)
+git reset --hard COMMIT_HASH
+git push --force
+
+SECTION 21 — Restore File from Main
+git checkout origin/main -- file.txt
+git add file.txt
+git commit
